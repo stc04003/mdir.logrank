@@ -1,4 +1,3 @@
-
 #' @export
 print.mdirLR <- function(x, ...) {
   cat("test statistic: ", "\n", "     ", x$stat, sep = "")

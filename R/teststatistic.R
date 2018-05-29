@@ -1,3 +1,4 @@
+#' @export
 # function for calculation of the test statistic (code chunks taken from http://www.math.uni-duesseldorf.de/~stoch/Software.htm)
 
 # LogRankStatistic

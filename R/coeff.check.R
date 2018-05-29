@@ -1,3 +1,5 @@
+#' @export
+
 ## The coeff.check functions checks wheter the specified directions are linearly independent.
 ## For this purpose the vectors consiting of the polynomial coefficients
 ## (rewrite w(x) = sum_{k=1}^maxpower c_k x^k ) are checked to be

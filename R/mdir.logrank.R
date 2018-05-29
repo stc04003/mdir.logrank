@@ -1,23 +1,24 @@
 #' Two-sample multiple-direction log rank test
 #'
-#' The mdir.logrank function calculates the p-values of the multiple-direction logrank test based
-#' on the \eqn{\chi^2}-approximation and the permutation approach
+#' The mdir.logrank function calculates the multiple-direction logrank
+#' statistic and its corresponding p-values  based on a
+#' \eqn{\chi^2}-approximation and a permutation approach
 #'
 #' @param data A data.frame, list or environment containing the variables \code{time},
-#'   \code{event} (with values 0 for censored and 1 for uncensored) and \time{group}.
+#'   \code{event} (with values 0 for censored and 1 for uncensored) and \code{time}.
 #' @param cross logical. Should the weight correspondng to crossing hazards be included?
 #'  The default is \code{TRUE}.
 #' @param rg A list (or \code{NULL}) containing the exponents \code{c(r, g)} of the directions
-#'   \eqn{w(x) = x^r (1-x)^g}. Both exponents need to be natural numbers including 0.
-#'  Default is \code{list( c(0, 0) )} corresponding to proportional hazards.
+#'   \eqn{w(x) = x^r (1-x)^g}. Both exponents r,g need to be natural numbers including 0.
+#'  Default is \code{list(c(0, 0))} corresponding to proportional hazards.
 #' @param nperm The number of permutations used for calculating the permuted p-value.
 #'   The default option is 10000.
-#' @param dig_p The p-values are rounded to dig_p digits, the default is \code{dig_p=3}.
-#' @param dig_stat The test statistic is rounded to dig_stat digits, the default is \code{dig_stat=3}.
+#' @param dig_p The p-values are rounded to \code{dig_p} digits, the default is 3.
+#' @param dig_stat The test statistic is rounded to \code{dig_stat} digits, the default is 3.
 #'
 #' @details The package provides the multiple-direction logrank statistic for
 #'   the two sample testing problem withing right-censored survival data. Directions
-#'   of the form w(x) = 1 - 2x (\code{cross = TRUE}) and w(x) = x^r * (1-x)^g for natural numbers
+#'   of the form \eqn{w(x) = 1 - 2x} (\code{cross = TRUE}) and \eqn{w(x) = x^r * (1-x)^g} for natural numbers
 #'   r,g (including 0) can be specified.
 #'   The multiple-direction logrank test needs linearly independent directions.
 #'   A check for this is implement. If the directions chosen by the user are
@@ -28,16 +29,17 @@
 #'   corresponding p-values: the first is based on a \eqn{chi^2} approximation and
 #'   the second one is based on a permutation procedure.
 #'
-#' @return A \code{mdir.logrank} object containing the following components:
+#'
+#' @return An  \code{mdirLR} object containing the following components:
 #' \item{Descriptive}{The directions used and whether the directions specified by the user were
-#'    were linearly independent}
+#'    linearly independent.}
 #'  \item{p.values}{The p-values of the multiple-direction logrank test using the
-#'    \eqn{\chi^2}-approximation (Approx.) as well as the one using the permutation approach (Perm.)}
-#'  \item{stat}{Value of the multiple-direction logrank statistic}
-#'  \item{rg}{A list containg the exponents of the direction considered in the statistical analysis
-#'  \item{cross}{logical. Was the crossing direction considered in the statistical analysis}
+#'    \eqn{\chi^2}-approximation (Approx.) as well as the one using the permutation approach (Perm.).}
+#'  \item{stat}{Value of the multiple-direction logrank statistic.}
+#'  \item{rg}{A list containg the exponents of the direction considered in the statistical analysis.}
+#'  \item{cross}{logical. Was the crossing direction considered in the statistical analysis?}
 #'  \item{indep}{logical. Were the directions specified by the user linearly independent?}
-#'  \item{nperm}{The number of permutations used for calculating the permuted p-value.
+#'  \item{nperm}{The number of permutations used for calculating the permuted p-value.}
 #' @examples
 #' library(coin)
 #' data(GTSG)
