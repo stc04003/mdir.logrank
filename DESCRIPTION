@@ -1,0 +1,11 @@
+Package: mdir.logrank
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.0.9000
+Author: Ditzhaus, M and Friedrich, S
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+LazyData: TRUE
+URL: http://github.com/marcdii/mdir.logrank
+BugReports: http://github.com/marcdii/mdir.logrank/issues
