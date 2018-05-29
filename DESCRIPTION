@@ -1,26 +1,11 @@
 Package: mdir.logrank
 Type: Package
-Title: Multiple-direction logrank test
+Title: Calculating the multiple-direction logrank statistic
 Version: 0.0.9000
-Date: 2018-01-04
-Author: Marc Ditzhaus and Sarah Friedrich
-Maintainer: Sarah Friedrich <sarah.friedrich@uni-ulm.de>
-Depends: 
-    R (>= 3.4.3)
-Description: Implemented is the multiple-direction logrank test
-    for two-sample right censored data. In addition to the 
-    statistic two p-values are calculated: the first one is based on a
-    chi-squared approximation and the second one is based on a
-    permutation approach.
-License: GPL-2 | GPL-3
-Imports: 
-    plyr (>= 1.8.3),
-    stats
-    MASS (>= 7.3-47)
+Author: Ditzhaus, M and Friedrich, S
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
 LazyData: TRUE
 URL: http://github.com/marcdii/mdir.logrank
 BugReports: http://github.com/marcdii/mdir.logrank/issues
-Suggests: 
-    RGtk2 (>= 2.20.34),
-RoxygenNote: 5.0.1
-
