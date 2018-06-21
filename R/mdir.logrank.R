@@ -5,8 +5,8 @@
 #' \eqn{\chi^2}-approximation and a permutation approach
 #'
 #' @param data A data.frame, list or environment containing the variables \code{time},
-#'   \code{event} (with values 0 for censored and 1 for uncensored) and \code{time}.
-#' @param cross logical. Should the weight correspondng to crossing hazards be included?
+#'   \code{event} (with values 0 for censored and 1 for uncensored) and \code{group}.
+#' @param cross logical. Should the weight corresponding to crossing hazards be included?
 #'  The default is \code{TRUE}.
 #' @param rg A list (or \code{NULL}) containing the exponents \code{c(r, g)} of the directions
 #'   \eqn{w(x) = x^r (1-x)^g}. Both exponents r,g need to be natural numbers including 0.
@@ -17,12 +17,12 @@
 #' @param dig_stat The test statistic is rounded to \code{dig_stat} digits, the default is 3.
 #'
 #' @details The package provides the multiple-direction logrank statistic for
-#'   the two sample testing problem withing right-censored survival data. Directions
+#'   the two sample testing problem within right-censored survival data. Directions
 #'   of the form \eqn{w(x) = 1 - 2x} (\code{cross = TRUE}) and \eqn{w(x) = x^r * (1-x)^g} for natural numbers
 #'   r,g (including 0) can be specified.
 #'   The multiple-direction logrank test needs linearly independent directions.
-#'   A check for this is implement. If the directions chosen by the user are
-#'   linearly independent then a subset consisting of linearly independent directions
+#'   A check for this is implemented. If the directions chosen by the user are
+#'   linearly dependent then a subset consisting of linearly independent directions
 #'   is selected automatically.
 #'
 #'   The \code{mdir.logrank} function returns the test statistic as well as two
@@ -36,7 +36,7 @@
 #'  \item{p.values}{The p-values of the multiple-direction logrank test using the
 #'    \eqn{\chi^2}-approximation (Approx.) as well as the one using the permutation approach (Perm.).}
 #'  \item{stat}{Value of the multiple-direction logrank statistic.}
-#'  \item{rg}{A list containg the exponents of the direction considered in the statistical analysis.}
+#'  \item{rg}{A list containing the exponents of the direction considered in the statistical analysis.}
 #'  \item{cross}{logical. Was the crossing direction considered in the statistical analysis?}
 #'  \item{indep}{logical. Were the directions specified by the user linearly independent?}
 #'  \item{nperm}{The number of permutations used for calculating the permuted p-value.}
@@ -45,20 +45,25 @@
 #' data(GTSG)
 #' out <- mdir.logrank(data = GTSG)
 #'
-#' ## Detailed informations:
+#' ## Detailed information:
 #' summary(out)
 #'
 #' @references Ditzhaus, M., Friedrich, S. (2018). Titel und so (Theory)
 #'
 #' Ditzhaus, M., Friedrich, S. (2018). Titel und so (practical paper)
 #'
-#' @importFrom stats pchisq
+#' @importFrom stats pchisq runif
 #' @importFrom utils read.table
 #'
 #' @export
 
 mdir.logrank <- function(data, cross = TRUE, rg = list( c(0,0) ), nperm = 10000, dig_p = 3, dig_stat = 3 ){
   data <- data.frame( time = data$time, status = data$event, group = data$group)
+
+  # breaking ties
+  dist <- runif(length(data$time))*10^-5
+  data$time <- data$time + dist
+
   data <- data[ order(data$time), ]
   data$group <- unlist( lapply( data$group, function(x){ paste0( "group ", x)}))
   lev_group <- levels( as.factor(data$group))
@@ -73,10 +78,10 @@ mdir.logrank <- function(data, cross = TRUE, rg = list( c(0,0) ), nperm = 10000,
   rg_un <- unlist( rg )
   if ( is.null(rg) == FALSE){
       if ( all( is.numeric( rg_un )) == FALSE ){
-        stop("The exponents r,g containing in rg need to be numeric")
+        stop("The exponents r,g contained in rg need to be numeric")
       }
       if ( all( rg_un == floor( rg_un)) == FALSE ){
-        stop("The exponents r,g containing in rg need to be natural numbers including 0")
+        stop("The exponents r,g contained in rg need to be natural numbers including 0")
       }
       for (i in 1:length(rg)){
         if (length( rg[[i]] ) != 2){

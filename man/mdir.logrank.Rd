@@ -9,9 +9,9 @@ mdir.logrank(data, cross = TRUE, rg = list(c(0, 0)), nperm = 10000,
 }
 \arguments{
 \item{data}{A data.frame, list or environment containing the variables \code{time},
-\code{event} (with values 0 for censored and 1 for uncensored) and \code{time}.}
+\code{event} (with values 0 for censored and 1 for uncensored) and \code{group}.}
 
-\item{cross}{logical. Should the weight correspondng to crossing hazards be included?
+\item{cross}{logical. Should the weight corresponding to crossing hazards be included?
 The default is \code{TRUE}.}
 
 \item{rg}{A list (or \code{NULL}) containing the exponents \code{c(r, g)} of the directions
@@ -28,11 +28,11 @@ The default option is 10000.}
 \value{
 An  \code{mdirLR} object containing the following components:
 \item{Descriptive}{The directions used and whether the directions specified by the user were
-   were linearly independent.}
+   linearly independent.}
  \item{p.values}{The p-values of the multiple-direction logrank test using the
    \eqn{\chi^2}-approximation (Approx.) as well as the one using the permutation approach (Perm.).}
  \item{stat}{Value of the multiple-direction logrank statistic.}
- \item{rg}{A list containg the exponents of the direction considered in the statistical analysis.}
+ \item{rg}{A list containing the exponents of the direction considered in the statistical analysis.}
  \item{cross}{logical. Was the crossing direction considered in the statistical analysis?}
  \item{indep}{logical. Were the directions specified by the user linearly independent?}
  \item{nperm}{The number of permutations used for calculating the permuted p-value.}
@@ -44,12 +44,12 @@ statistic and its corresponding p-values  based on a
 }
 \details{
 The package provides the multiple-direction logrank statistic for
-  the two sample testing problem withing right-censored survival data. Directions
+  the two sample testing problem within right-censored survival data. Directions
   of the form \eqn{w(x) = 1 - 2x} (\code{cross = TRUE}) and \eqn{w(x) = x^r * (1-x)^g} for natural numbers
   r,g (including 0) can be specified.
   The multiple-direction logrank test needs linearly independent directions.
-  A check for this is implement. If the directions chosen by the user are
-  linearly independent then a subset consisting of linearly independent directions
+  A check for this is implemented. If the directions chosen by the user are
+  linearly dependent then a subset consisting of linearly independent directions
   is selected automatically.
 
   The \code{mdir.logrank} function returns the test statistic as well as two
@@ -61,7 +61,7 @@ library(coin)
 data(GTSG)
 out <- mdir.logrank(data = GTSG)
 
-## Detailed informations:
+## Detailed information:
 summary(out)
 
 }

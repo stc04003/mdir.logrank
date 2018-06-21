@@ -1,5 +1,4 @@
-#' @export
-# function for calculation of the test statistic (code chunks taken from http://www.math.uni-duesseldorf.de/~stoch/Software.htm)
+# function for calculation of the test statistic
 
 # LogRankStatistic
 
@@ -63,7 +62,7 @@ ECM <- function(V, KME, wv,...){
   return(x3)
 }
 
-teststatistic <- function(data, w, perm = 1:n, ...){
+teststatistic <- function(data, w, perm, ...){
   data$group <- data$group[ perm ] # Permutation approach, for the teststatistic set perm = 1:n
   LRS <- lapply(w, FUN = logRankStatistic, data)
   Tn <- unlist(lapply(LRS, "[[", "Tn")) # vector Tn

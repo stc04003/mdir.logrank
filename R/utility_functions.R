@@ -10,7 +10,8 @@ print.mdirLR <- function(x, ...) {
 }
 
 #' @export
-summary.mdirLR <- function (x, ...) {
+summary.mdirLR <- function (object, ...) {
+  x <- object
   if ( length(x$rg) == 0 ){
     cat("The chosen weights are linearly independent.", "\n",
         "The test is based on the crossing weight.", "\n","\n")
