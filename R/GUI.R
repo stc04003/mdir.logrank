@@ -42,22 +42,25 @@ calculateGUI <- function(){
   filename$setWidthChars(50)
   label$setMnemonicWidget(filename)
   hbox$packStart(filename, FALSE, FALSE, 0)
-  #Add the Text "Headers?"
+  #The data always need a header, otherwise, your function does not work.
+  #Thus, the question "Headers?" is not needed.
+  ##Add the Text "Headers?"
   hbox <- RGtk2::gtkHBoxNew(FALSE, 8)
   vbox1$packStart(hbox, FALSE, FALSE, 0)
-  label <- RGtk2::gtkLabelNewWithMnemonic("_Headers?")
-  hbox$packStart(label, FALSE, FALSE, 0)
+  #label <- RGtk2::gtkLabelNewWithMnemonic("_Headers?")
+  #hbox$packStart(label, FALSE, FALSE, 0)
   #Add the checkbox for the question "Headers?"
-  headersEntry <- RGtk2::gtkCheckButton()
-  headersEntry$active <- TRUE
-  hbox$packStart(headersEntry, FALSE, FALSE, 0)
-  label$setMnemonicWidget(headersEntry)
+  #headersEntry <- RGtk2::gtkCheckButton()
+  #headersEntry$active <- TRUE
+  #hbox$packStart(headersEntry, FALSE, FALSE, 0)
+  #label$setMnemonicWidget(headersEntry)
+
   # what separator is used?
   label <- RGtk2::gtkLabelNewWithMnemonic("Col. _Separator?")
   hbox$packStart(label, FALSE, FALSE, 0)
   sepEntry <- RGtk2::gtkEntryNew()
   sepEntry$setWidthChars(1)
-  sepEntry$setText("")
+  sepEntry$setText(",")
   hbox$packStart(sepEntry, FALSE, FALSE, 0)
   label$setMnemonicWidget(sepEntry)
   # what's the character used for decimal points?
@@ -282,7 +285,7 @@ calculateGUI <- function(){
   hbox$packStart(label, FALSE, FALSE, 0)
   # Add wait field
   wait <- RGtk2::gtkEntryNew()
-  wait$setWidthChars(40)
+  wait$setWidthChars(50)
   label$setMnemonicWidget(wait)
   hbox$packStart(wait, FALSE, FALSE, 0)
   # Add a horizontal box
@@ -347,16 +350,28 @@ calculateGUI <- function(){
     the.digp <- as.numeric(digpval$getText())
     the.digs <- as.numeric(digstat$getText())
     the.sep <- sepEntry$getText()
-    the.headers <- headersEntry$active
+    #the.headers <- headersEntry$active # not needed for our situation
     the.dec <- decEntry$getText()
     tryCatch(
-      d <- read.table(the.file, sep = the.sep, header = the.headers,
+      d <- read.table(the.file, sep = the.sep, header = TRUE,
                     dec = the.dec),
       error = function(e){
         wait$setText("ERROR: Problems with reading the data")
         return(0)
       }
     )
+    if( sum(c("time","group","event") %in% names(d)) != 3){
+      # Note that a misspecification of sep or dec may also lead here to
+      # an error, that is why we prefer this error text instead of a more
+      # specific one
+      wait$setText("ERROR: Problems with reading the data!")
+      return()
+    }
+    lev_group <- levels( as.factor(d$group))
+    if ( length(lev_group) != 2){
+      wait$setText("ERROR: There are either more or less than 2 groups!")
+      return()
+    }
     the.prop     <- propEntry$active
     the.central  <- centralEntry$active
     the.early    <- earlyEntry$active
@@ -380,8 +395,7 @@ calculateGUI <- function(){
         # ->error
         # Note that also "" can be choosen. Hence, the value 0
         # represent that nothing is chosen.
-        wait$setText("ERROR: Check the user specified directions!")
-        return()
+
       }
       if( r>0 && g>0){ # Both exponents are specified
         rg <- c( rg, list(c(r-1, g-1)) )
