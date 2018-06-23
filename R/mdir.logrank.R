@@ -58,14 +58,14 @@
 #' @export
 
 mdir.logrank <- function(data, cross = TRUE, rg = list( c(0,0) ), nperm = 10000, dig_p = 3, dig_stat = 3 ){
-  if( sum(c("time","group","event") %in% names(d)) != 3){
+  if( sum(c("time","group","event") %in% names(data)) != 3){
     stop("The data does not contain all three variables group, event, time.")
   }
   data <- data.frame( time = data$time, status = data$event, group = data$group)
 
   # breaking ties
   dist <- runif(length(data$time))*10^-5
-  data$time <- data$time + dist
+  data$time <- sum( c(data$time, dist) )
 
   data <- data[ order(data$time), ]
   data$group <- unlist( lapply( data$group, function(x){ paste0( "group ", x)}))
