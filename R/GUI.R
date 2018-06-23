@@ -435,4 +435,3 @@ calculateGUI <- function(){
   RGtk2::gSignalConnect(buttonLoad, "clicked", getDirectory)
   RGtk2::gSignalConnect(buttonCancel, "clicked", window$destroy)
 }
-
