@@ -43,14 +43,13 @@
 #' @examples
 #' library(coin)
 #' data(GTSG)
-#' out <- mdir.logrank(data = GTSG)
+#' out <- mdir.logrank(data = GTSG, nperm = 1000)
 #'
 #' ## Detailed information:
 #' summary(out)
 #'
-#' @references Ditzhaus, M., Friedrich, S. (2018). Titel und so (Theory)
-#'
-#' Ditzhaus, M., Friedrich, S. (2018). Titel und so (practical paper)
+#' @references Ditzhaus, M., Friedrich, S. (2018). More powerful logrank
+#' permutation tests for two-sample survival data. arXiv preprint arXiv:1807.05504.
 #'
 #' @importFrom stats pchisq runif
 #' @importFrom utils read.table
