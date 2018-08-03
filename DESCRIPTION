@@ -1,8 +1,8 @@
 Package: mdir.logrank
 Type: Package
-Title: Multiple-direction logrank test
-Version: 0.0.9000
-Date: 2018-01-04
+Title: Multiple-Direction Logrank Test
+Version: 0.0.1
+Date: 2018-07-18
 Author: Marc Ditzhaus and Sarah Friedrich
 Maintainer: Sarah Friedrich <sarah.friedrich@uni-ulm.de>
 Depends: 
