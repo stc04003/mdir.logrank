@@ -455,7 +455,8 @@ calculateGUI_twosided <- function(){
         # ->error
         # Note that also "" can be choosen. Hence, the value 0
         # represent that nothing is chosen.
-
+        wait$setText("ERROR: Choose r and g for each user specified direction!")
+        return()
       }
       if( r>0 && g>0){ # Both exponents are specified
         rg <- c( rg, list(c(r-1, g-1)) )
@@ -952,7 +953,8 @@ calculateGUI_onesided <- function(){
           # ->error
           # Note that also "" can be choosen. Hence, the value 0
           # represent that nothing is chosen.
-
+          wait$setText("ERROR: Choose r and g for each user specified direction!")
+          return()
         }
         if( r>0 && g>0){ # Both exponents are specified
           rg <- c( rg, list(c(r-1, g-1)) )
