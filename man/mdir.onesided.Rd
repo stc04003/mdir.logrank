@@ -4,19 +4,19 @@
 \alias{mdir.onesided}
 \title{Two-sample multiple-direction log rank test for stochastic ordered alternatives}
 \usage{
-mdir.onesided(data, rg = list(c(0, 0), c(0, 4), c(4, 0)), group1,
+mdir.onesided(data, group1, rg = list(c(0, 0), c(0, 4), c(4, 0)),
   wild = "rade", iter = 10000, dig_p = 3, dig_stat = 3)
 }
 \arguments{
 \item{data}{A data.frame, list or environment containing the variables \code{time},
 \code{event} (with values 0 for censored and 1 for uncensored) and \code{group}.}
 
+\item{group1}{The name or the coding for the first group in the data set}
+
 \item{rg}{A list containing the exponents \code{c(r, g)} of the directions
  \eqn{w(x) = x^r (1-x)^g}. Both exponents r,g need to be natural numbers including 0.
 Default is \code{list(c(0, 0), c(0, 4), c(4, 0))} corresponding to the choice of the
 proportional, early and late direction/weight.}
-
-\item{group1}{The name or the coding for the first group in the data set}
 
 \item{wild}{The wild bootstrap approach used for estimating the p-value. The Rademacher
 (\code{rade}, default), the normal distribution (\code{norm}) or the centred
@@ -51,9 +51,9 @@ its p-value  based on a wild bootstrap approach
 The function provides the multiple-direction logrank statistic for
   the two sample one-sided testing problem of stochastic ordering within right-censored survival data.
   The null hypothesis \eqn{H:F1=F2} is tested against the one-sided alternative \eqn{K:F1 \ge F2,
-  F1 \e F2}. The first group corresponding to \eqn{F1} can be specified
+  F1 \neq F2}. The first group corresponding to \eqn{F1} can be specified
   by the argument \code{group1}. An arbitrary amount of directions/weights of the form
-  \eqn{w(x) = x^r * (1-x)^g} for natural numbers r,g (including 0) can be chosen in the list
+  \eqn{w(x) = x^r (1-x)^g} for natural numbers r,g (including 0) can be chosen in the list
   \code{rg}. The multiple-direction onsided logrank test needs linearly independent directions.
   A check for this is implemented. If the directions chosen by the user are
   linearly dependent then a subset consisting of linearly independent directions
@@ -75,5 +75,5 @@ summary(out)
 Ditzhaus, M., Pauly, M. (2018). ????
 }
 \seealso{
-[mdir.logrank()] (two-sided test)
+\code{\link[mdir.logrank]{mdir.onesided}}
 }

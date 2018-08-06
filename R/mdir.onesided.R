@@ -6,11 +6,12 @@
 #'
 #' @param data A data.frame, list or environment containing the variables \code{time},
 #'   \code{event} (with values 0 for censored and 1 for uncensored) and \code{group}.
+#' @param group1 The name or the coding for the first group in the data set (neceassary for
+#' a one-sided testing problem).
 #' @param rg A list containing the exponents \code{c(r, g)} of the directions
 #'   \eqn{w(x) = x^r (1-x)^g}. Both exponents r,g need to be natural numbers including 0.
 #'  Default is \code{list(c(0, 0), c(0, 4), c(4, 0))} corresponding to the choice of the
 #'  proportional, early and late direction/weight.
-#' @param group1 The name or the coding for the first group in the data set
 #' @param wild The wild bootstrap approach used for estimating the p-value. The Rademacher
 #'   (\code{rade}, default), the normal distribution (\code{norm}) or the centred
 #'   Poisson distribution (\code{pois}) approach can be selected.
@@ -21,16 +22,16 @@
 #'
 #' @details The function provides the multiple-direction logrank statistic for
 #'   the two sample one-sided testing problem of stochastic ordering within right-censored survival data.
-#'   The null hypothesis \eqn{H:F1=F2} is tested against the one-sided alternative \eqn{K:F1 \ge F2,
-#'   F1 \e F2}. The first group corresponding to \eqn{F1} can be specified
+#'   The null hypothesis \eqn{H:F_1=F_2} is tested against the one-sided alternative \eqn{K:F_1 \ge F_2,
+#'   F_1 \neq F_2}. The first group corresponding to \eqn{F_1} can be specified
 #'   by the argument \code{group1}. An arbitrary amount of directions/weights of the form
-#'   \eqn{w(x) = x^r * (1-x)^g} for natural numbers r,g (including 0) can be chosen in the list
+#'   \eqn{w(x) = x^r (1-x)^g} for natural numbers r,g (including 0) can be chosen in the list
 #'   \code{rg}. The multiple-direction onsided logrank test needs linearly independent directions.
 #'   A check for this is implemented. If the directions chosen by the user are
 #'   linearly dependent then a subset consisting of linearly independent directions
 #'   is selected automatically.
 #'
-#'   The \code{mdir.logrank} function returns the test statistic and the p-value
+#'   The \code{mdir.onesided} function returns the test statistic and the p-value
 #'   based on a wild bootstrap procedure \code{wild}.
 #'
 #'
@@ -55,14 +56,14 @@
 #'
 #' @references Ditzhaus, M., Pauly, M. (2018). ????
 #'
-#' @seealso [mdir.logrank()] (two-sided test)
+#' @seealso \code{\link[mdir.logrank]{mdir.onesided}}
 #'
 #' @importFrom stats runif
 #' @importFrom utils read.table
 #'
 #' @export
 
-mdir.onesided <- function(data, rg = list( c(0, 0), c(0, 4), c(4, 0) ), group1, wild = "rade", iter = 10000, dig_p = 3, dig_stat = 3 ){
+mdir.onesided <- function(data, group1, rg = list( c(0, 0), c(0, 4), c(4, 0) ), wild = "rade", iter = 10000, dig_p = 3, dig_stat = 3 ){
   if( sum(c("time","group","event") %in% names(data)) != 3){
     stop("The data does not contain all three variables group, event, time.")
   }
