@@ -2,7 +2,7 @@
 
 # LogRankStatistic
 
-logRankStatistic<- function(w, data, ...){
+logRankStatistic<- function(w, data, G = 1, ...){
 
   # status: censored=0, uncensored=1
   # group: 1.group (0) or 2.group (1)
@@ -26,7 +26,7 @@ logRankStatistic<- function(w, data, ...){
   expected <- n.risk.0/n.risk*status
   OME1 <- (n.events.1 - expected)
   # multiply with weights:
-  OMEw <- wFn * OME1
+  OMEw <- G * wFn * OME1
 
   # calcualtion of variance
   V <- status*(n.risk.0/n.risk)*(1-n.risk.0/n.risk)*(n.risk-status)/(n.risk-1)
@@ -62,6 +62,8 @@ ECM <- function(V, KME, wv,...){
   return(x3)
 }
 
+
+# Statistic for the two-sided testing problem
 teststatistic <- function(data, w, perm, ...){
   data$group <- data$group[ perm ] # Permutation approach, for the teststatistic set perm = 1:n
   LRS <- lapply(w, FUN = logRankStatistic, data)
@@ -73,4 +75,36 @@ teststatistic <- function(data, w, perm, ...){
 
   statistic <- t(Tn) %*% MASS::ginv(sigma_hat) %*% Tn     # Tn Sigma^-1 Tn
   return( c(statistic) )
+}
+
+# Statistic for the one-sided testing problem
+teststat <- function(x, data, w, G,...){
+  w <- w[x]
+  LRS <- lapply(w, FUN = logRankStatistic, data = data, G = G)
+  Tn <- unlist(lapply(LRS, "[[", "Tn")) # vector Tn
+  # extract Variances and F_hat for calculation of covariance matrix
+  V <- lapply(LRS, "[[", "V")[[1]]
+  KME <- lapply(LRS, "[[", "KME")[[1]]
+  sigma_hat <- ECM(V, KME, w) # Sigma (covariance matrix)
+  pre_statistic <- MASS::ginv(sigma_hat) %*% Tn     #  Sigma^-1 Tn
+
+  statistic <- ifelse( any(pre_statistic < 0), 0, t(Tn) %*% pre_statistic)    # Tn Sigma^-1 Tn or 0
+  return( c(statistic) )
+}
+
+pset <- function(n){
+  l <- vector(mode="list",length=2^n) ; l[[1]]=numeric()
+  counter <- 1
+  for(x in 1:n){
+    for(subset in 1:counter){
+      counter=counter+1
+      l[[counter]] <- c(l[[subset]], x)
+    }
+  }
+  return(l[2:2^n])
+}
+
+teststat_max <- function(data, w,  G = 1, ...){
+  powerset <- pset( length(w) )
+  stat <- max( unlist( lapply(powerset, teststat, data = data, G = G, w = w ) ))
 }

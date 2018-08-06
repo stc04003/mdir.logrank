@@ -9,6 +9,6 @@ calculateGUI()
 }
 \description{
 This function provides a graphical user interface for calculating
-multiple-direction logrank test and the corresponding p-values
-(based on \eqn{\chi^2}-approximation as well as on permutation).
+multiple-direction logrank test for the two-sided and the one-sided
+testing problem.
 }
