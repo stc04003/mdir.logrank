@@ -51,7 +51,7 @@
 #' @references Ditzhaus, M., Friedrich, S. (2018). More powerful logrank
 #' permutation tests for two-sample survival data. arXiv preprint arXiv:1807.05504.
 #'
-#' @seealso \code{\link[mdir.logrank]{mdir.onesided}} (one-sided test)
+#' @seealso \code{\link{mdir.onesided}} (one-sided test)
 #'
 #' @importFrom stats pchisq runif
 #' @importFrom utils read.table

@@ -75,5 +75,5 @@ summary(out)
 Ditzhaus, M., Pauly, M. (2018). ????
 }
 \seealso{
-\code{\link[mdir.logrank]{mdir.logrank}} (two-sided test)
+[mdir.logrank()] (two-sided test)
 }

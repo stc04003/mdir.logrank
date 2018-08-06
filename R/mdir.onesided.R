@@ -55,7 +55,7 @@
 #'
 #' @references Ditzhaus, M., Pauly, M. (2018). ????
 #'
-#' @seealso \code{\link[mdir.logrank]{mdir.logrank}} (two-sided test)
+#' @seealso [mdir.logrank()] (two-sided test)
 #'
 #' @importFrom stats runif
 #' @importFrom utils read.table
