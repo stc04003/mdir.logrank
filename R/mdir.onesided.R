@@ -119,14 +119,17 @@ mdir.onesided <- function(data, group1, rg = list( c(0, 0), c(0, 4), c(4, 0) ), 
   match.fun( w.funct )
   w <- lapply( rg, w.funct )
   n <- length(data$group)
-  stat <- teststat_max( data, w, G = 1)
   if ( wild == "rade"){
-    stat_boot <- replicate(iter, teststat_max(data = data, w = w,  G = sample( c(-1,1), n, replace = TRUE) ))
+    out <- teststat_max_cov( data, w, G = 1)
+    stat <- out$stat
+    stat_boot <- replicate(iter, teststat_max_rade(data = data, w = w,  G = sample( c(-1,1), n, replace = TRUE), Sigma_inv = out$Sigma_inv ))
   }
   if ( wild == "norm"){
+    stat <- teststat_max( data, w, G = 1)
     stat_boot <- replicate(iter, teststat_max(data = data, w = w, G = stats::rnorm(n) ))
   }
   if ( wild == "pois"){
+    stat <- teststat_max( data, w, G = 1)
     stat_boot <- replicate(iter, teststat_max(data = data, w = w, G = stats::rpois(n,1)-1))
   }
   p_value <- round( mean(  stat_boot > stat ), digits = dig_p)
