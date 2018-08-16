@@ -70,6 +70,7 @@ calculateGUI <- function(){
 ############# GUI for two-sided testing problem ##################
 ###################################################################
 ###################################################################
+#' @export
 calculateGUI_twosided <- function(){
   #require("RGtk2", quietly = TRUE)
   requireNamespace("RGtk2", quietly = TRUE)
@@ -501,6 +502,7 @@ calculateGUI_twosided <- function(){
 ############# GUI for the one-sided testing problem ###############
 ###################################################################
 ###################################################################
+#' @export
 calculateGUI_onesided <- function(){
   #require("RGtk2", quietly = TRUE)
   requireNamespace("RGtk2", quietly = TRUE)
