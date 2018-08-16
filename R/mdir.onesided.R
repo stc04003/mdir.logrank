@@ -73,13 +73,13 @@ mdir.onesided <- function(data, group1, rg = list( c(0, 0), c(0, 4), c(4, 0) ), 
   if( sum(c("time","group","event") %in% names(data)) != 3){
     stop("The data does not contain all three variables group, event, time.")
   }
-  data <- data.frame( time = data$time, status = data$event, group = data$group)
-
   # breaking ties
   dist <- runif(length(data$time))*10^-5
   data$time <- sum( c(data$time, dist) )
+  ordering <- order(data$time)
 
-  data <- data[ order(data$time), ]
+  data <- data.frame( time = data$time[ordering], status = data$event[ordering], group = data$group[ordering])
+
   data$group <- unlist( lapply( data$group, function(x){ paste0(x)}))
   group1_p <- paste0(group1)
   lev_group <- levels( as.factor(data$group))
