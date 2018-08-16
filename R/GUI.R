@@ -31,7 +31,7 @@ calculateGUI <- function(){
   label <- RGtk2::gtkLabelNewWithMnemonic("Testing problem: ")
   hbox$packStart(label, FALSE, FALSE, 0)
   #Add combobox
-  choices <- RGtk2::rGtkDataFrame(c(" One-side  ", " Two-sided  "))
+  choices <- RGtk2::rGtkDataFrame(c(" One-sided  ", " Two-sided  "))
   hbox$packStart
   combobox <- RGtk2::gtkComboBox(choices)
   crt <- RGtk2::gtkCellRendererText()

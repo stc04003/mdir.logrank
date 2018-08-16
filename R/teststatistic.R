@@ -36,7 +36,7 @@ logRankStatistic<- function(w, data, G = 1, ...){
   # test statistic
   Tn <- sum(OMEw)
 
-  output <- list(Tn = Tn, V = V, KME = KME)
+  output <- list(Tn = Tn, V = V, KME = KME, Vw = Vw)
 
   return(output)
 }

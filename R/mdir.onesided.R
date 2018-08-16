@@ -12,7 +12,7 @@
 #'   \eqn{w(x) = x^r (1-x)^g} or \code{NA}. Both exponents r,g need to be natural numbers including 0.
 #'  Default is \code{list(c(0, 0), c(0, 4), c(4, 0))} corresponding to the choice of the
 #'  proportional, early and late direction/weight.
-#' @param w.user A list containing the user specified functions or \code{NA} (default). \
+#' @param w.user A list containing the user specified functions or \code{NA} (default).
 #' @param wild The wild bootstrap approach used for estimating the p-value. The Rademacher
 #'   (\code{rade}, default), the normal distribution (\code{norm}) or the centred
 #'   Poisson distribution (\code{pois}) approach can be selected.
