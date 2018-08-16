@@ -1,7 +1,7 @@
 # function for calculation of the test statistic
 
 # LogRankStatistic
-
+#' @export
 logRankStatistic<- function(w, data, G = 1, ...){
 
   # status: censored=0, uncensored=1
@@ -42,7 +42,7 @@ logRankStatistic<- function(w, data, G = 1, ...){
 }
 
 # Empirical Covariance Matrix
-
+#' @export
 ECM <- function(V, KME, wv,...){
   # ECM: Empirical Covariance Matrix: same code as for denominator above, only with two weight functions
 
@@ -62,6 +62,7 @@ ECM <- function(V, KME, wv,...){
 
 
 # Statistic for the two-sided testing problem
+#' @export
 teststatistic <- function(data, w, perm, ...){
   data$group <- data$group[ perm ] # Permutation approach, for the teststatistic set perm = 1:n
   LRS <- lapply(w, FUN = logRankStatistic, data)
@@ -76,6 +77,7 @@ teststatistic <- function(data, w, perm, ...){
 }
 
 # Statistic for the one-sided testing problem
+#' @export
 teststat <- function(x, Sigma, Tn ){
   Sigma <- Sigma[x,x]
   Tn <- Tn[x]
@@ -83,7 +85,7 @@ teststat <- function(x, Sigma, Tn ){
   statistic <- ifelse( any(pre_statistic < 0), 0, t(Tn) %*% pre_statistic)    # Tn Sigma^-1 Tn or 0
   return( c(statistic) )
 }
-
+#' @export
 pset <- function(n){
   l <- vector(mode="list",length=2^n) ; l[[1]]=numeric()
   counter <- 1
@@ -95,7 +97,7 @@ pset <- function(n){
   }
   return(l[2:2^n])
 }
-
+#' @export
 teststat_max <- function(data, w,  G = 1, ...){
   LRS <- lapply(w, FUN = logRankStatistic, data = data, G = G)
   Tn <- unlist(lapply(LRS, "[[", "Tn")) # vector Tn
@@ -110,7 +112,7 @@ teststat_max <- function(data, w,  G = 1, ...){
 # Boost for the Rademacher approach. Here, the bootstrap variance estimator
 # is independent of the multiplier G's since G_i^2=1.
 # Hence, it coincides with the (unconditional) variance estimator
-
+#' @export
 logRankStatistic_rade <- function(w, data, G, ...){
 
   # status: censored=0, uncensored=1
@@ -146,7 +148,7 @@ logRankStatistic_rade <- function(w, data, G, ...){
 }
 
 
-
+#' @export
 teststat_max_cov <- function(data, w,  G = 1, ...){
   LRS <- lapply(w, FUN = logRankStatistic, data = data, G = G)
   Tn <- unlist(lapply(LRS, "[[", "Tn")) # vector Tn
@@ -158,7 +160,7 @@ teststat_max_cov <- function(data, w,  G = 1, ...){
   stat <- max( unlist( lapply(powerset, teststat, Sigma = Sigma, Tn = Tn) ))
   out <- list( stat = stat, Sigma = Sigma)
 }
-
+#' @export
 teststat_max_rade <- function(data, w,  G = 1, Sigma, ...){
   LRS <- lapply(w, FUN = logRankStatistic_rade, data = data, G = G)
   Tn <- unlist(lapply(LRS, "[[", "Tn")) # vector Tn
@@ -166,5 +168,3 @@ teststat_max_rade <- function(data, w,  G = 1, Sigma, ...){
   stat <- max( unlist( lapply(powerset, teststat, Sigma = Sigma, Tn = Tn) ))
   out <- list( stat = stat)
 }
-
-
