@@ -66,7 +66,7 @@ mdir.logrank <- function(data, cross = TRUE, rg = list( c(0,0) ), nperm = 10000,
 
   # breaking ties
   dist <- runif(length(data$time))*10^-5
-  data$time <- sum( c(data$time, dist) )
+  data$time <- data$time + dist
 
   data <- data[ order(data$time), ]
   data$group <- unlist( lapply( data$group, function(x){ paste0( "group ", x)}))

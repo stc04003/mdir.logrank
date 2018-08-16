@@ -74,8 +74,8 @@ mdir.onesided <- function(data, group1, rg = list( c(0, 0), c(0, 4), c(4, 0) ), 
     stop("The data does not contain all three variables group, event, time.")
   }
   # breaking ties
-  dist <- runif(length(data$time))*10^-5
-  data$time <- sum( c(data$time, dist) )
+  dist <- runif(length(data$time))*10^(-5)
+  data$time <- data$time + dist
   ordering <- order(data$time)
 
   data <- data.frame( time = data$time[ordering], status = data$event[ordering], group = data$group[ordering])
