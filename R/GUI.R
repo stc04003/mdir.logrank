@@ -70,7 +70,7 @@ calculateGUI <- function(){
 ############# GUI for two-sided testing problem ##################
 ###################################################################
 ###################################################################
-#' @export
+
 calculateGUI_twosided <- function(){
   #require("RGtk2", quietly = TRUE)
   requireNamespace("RGtk2", quietly = TRUE)
@@ -502,7 +502,6 @@ calculateGUI_twosided <- function(){
 ############# GUI for the one-sided testing problem ###############
 ###################################################################
 ###################################################################
-#' @export
 calculateGUI_onesided <- function(){
   #require("RGtk2", quietly = TRUE)
   requireNamespace("RGtk2", quietly = TRUE)
@@ -580,7 +579,7 @@ calculateGUI_onesided <- function(){
   hbox$packStart(label, FALSE, FALSE, 0)
   #Add an empty combobox which can be manipuled later by the commands
   # gtkComboBoxAppendText, gtkComboBoxRemoveText, gtkComboBoxPrependText (see below)
-  combogroup1 <- gtkComboBoxNewText()
+  combogroup1 <- RGtk2::gtkComboBoxNewText()
   hbox$packStart(combogroup1)
   #new horizontal
   hbox <- RGtk2::gtkHBoxNew(FALSE, 8)
