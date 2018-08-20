@@ -9,7 +9,7 @@
 #  rg:     a list containing the exponents r,g.
 #  cross:  logical. Is the directions corresponding to crossing hazards included?
 #  indep: logical. Were the original directions linearly dependent?
-#' @export
+
 coeff.check <- function(cross = cross, rg = rg){
   if ( is.null(rg) ){
     return( list( rg = rg, cross = cross, indep = TRUE) )
