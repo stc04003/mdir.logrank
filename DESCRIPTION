@@ -7,11 +7,13 @@ Author: Marc Ditzhaus and Sarah Friedrich
 Maintainer: Sarah Friedrich <sarah.friedrich@uni-ulm.de>
 Depends: 
   R (>= 3.5.0)
-Description: Implemented is the multiple-direction logrank test 
-  for two-sample right censored data. In addition to the 
-  statistic two p-values are calculated: the first one is based on a
-  chi-squared approximation and the second one is based on a
-  permutation approach.
+Description: Implemented are the one-sided and two-sided 
+  multiple-direction logrank test for two-sample right 
+  censored data. In addition to the statistics p-values are calculated: 
+  1. For the one-sided testing problem one p-value based on a
+   wild bootstrap approach is determined. 2. In the two-sided case
+   one p-value based on a chi-squared approximation and 
+   a second p-valuesvbased on a permutation approach are calculated.
 License: GPL-2 | GPL-3
 Imports: 
   plyr (>= 1.8.3),

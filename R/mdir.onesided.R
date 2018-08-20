@@ -60,7 +60,7 @@
 #' summary(out)
 #'
 #' @references Ditzhaus, M., Pauly, M. (2018). Wild bootstrap logrank tests with
-#' broader power functions for testing superiority.
+#' broader power functions for testing superiority. arXiv preprint arXiv:arXiv:1808.05627.
 #'
 #' @seealso \code{\link[mdir.logrank]{mdir.onesided}}
 #'
