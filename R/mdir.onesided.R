@@ -54,7 +54,7 @@
 #' @examples
 #' library(coin)
 #' data(GTSG)
-#' out <- mdir.onesided(data = GTSG, group1 = "Chemotherapy+Radiation")
+#' out <- mdir.onesided(data = GTSG, group1 = "Chemotherapy+Radiation", iter = 1000)
 #'
 #' ## Detailed information:
 #' summary(out)

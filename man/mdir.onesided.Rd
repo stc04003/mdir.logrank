@@ -5,7 +5,8 @@
 \title{Two-sample multiple-direction log rank test for stochastic ordered alternatives}
 \usage{
 mdir.onesided(data, group1, rg = list(c(0, 0), c(0, 4), c(4, 0)),
-  w.user = NA, wild = "rade", iter = 10000, dig_p = 3, dig_stat = 3)
+  w.user = NA, wild = "rade", iter = 10000, dig_p = 3,
+  dig_stat = 3)
 }
 \arguments{
 \item{data}{A data.frame, list or environment containing the variables \code{time},
@@ -72,7 +73,7 @@ The function provides the multiple-direction logrank statistic for
 \examples{
 library(coin)
 data(GTSG)
-out <- mdir.onesided(data = GTSG, group1 = "Chemotherapy+Radiation")
+out <- mdir.onesided(data = GTSG, group1 = "Chemotherapy+Radiation", iter = 1000)
 
 ## Detailed information:
 summary(out)
