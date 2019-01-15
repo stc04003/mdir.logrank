@@ -6,7 +6,7 @@ print.mdirLR <- function(x, ...) {
       df, " df): ",
       "\n", "     ", x$p_value$Approx, sep = "")
   cat("\n", "p-value (", x$nperm, " permutations): ",
-      "\n", "     ", x$p_value$Perm, sep = "")
+      "\n", "     ", x$p_value$Perm, "\n", sep = "")
 }
 
 #' @export
@@ -44,7 +44,7 @@ print.mdirone <- function(x, ...) {
     boot <- "centered Poisson"
   }
   cat("\n", "p-value (", boot, " wild bootstrap, ", x$iter, " iterations): ",
-      "\n", "     ", x$p_value, sep = "")
+      "\n", "     ", x$p_value, "\n", sep = "")
 }
 
 #' @export

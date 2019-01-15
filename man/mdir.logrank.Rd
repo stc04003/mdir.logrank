@@ -45,7 +45,7 @@ statistic and its corresponding p-values  based on a
 \details{
 The package provides the multiple-direction logrank statistic for
   the two sample testing problem within right-censored survival data. Directions
-  of the form \eqn{w(x) = 1 - 2x} (\code{cross = TRUE}) and \eqn{w(x) = x^r * (1-x)^g} for natural numbers
+  of the form \eqn{w(x) = 1 - 2x} (\code{cross = TRUE}) and \eqn{w(x) = x^r (1-x)^g} for natural numbers
   r,g (including 0) can be specified.
   The multiple-direction logrank test needs linearly independent directions.
   A check for this is implemented. If the directions chosen by the user are
@@ -53,7 +53,7 @@ The package provides the multiple-direction logrank statistic for
   is selected automatically.
 
   The \code{mdir.logrank} function returns the test statistic as well as two
-  corresponding p-values: the first is based on a \eqn{chi^2} approximation and
+  corresponding p-values: the first is based on a \eqn{\chi^2} approximation and
   the second one is based on a permutation procedure.
 }
 \examples{
